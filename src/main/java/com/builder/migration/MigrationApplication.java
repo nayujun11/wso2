@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.builder.migration.repository.ApiRepository;
+import com.builder.migration.service.Wso2ApiService;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.builder.migration.repository")
@@ -15,7 +15,9 @@ import com.builder.migration.repository.ApiRepository;
 public class MigrationApplication implements CommandLineRunner {
 
 	@Autowired
-	private ApiRepository apiRepository;
+	// private ApiRepository apiRepository;
+
+    private Wso2ApiService wso2ApiService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(MigrationApplication.class, args);
@@ -33,6 +35,13 @@ public class MigrationApplication implements CommandLineRunner {
         // api2.setName("Sample API 2");
         // api2.setDescription("This is the second sample API.");
         // wso2ApiRepository.save(api2);
+
+        if (args.length > 0) {
+            // String input = args[0];
+            wso2ApiService.wso2SaveApi();
+        } else {
+            System.out.println("No arguments provided!");
+        }
     }
 
 }

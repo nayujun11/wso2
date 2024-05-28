@@ -16,10 +16,10 @@ public class Api {
     private String name;
     private String description;
     private String context;
-    private String verson;
+    private String version;
     private String provider;
     private String status;
-    private String thumbnaiUri;
+    private String thumbnailUri;
 
     @ElementCollection
     private List<String> scopes;
