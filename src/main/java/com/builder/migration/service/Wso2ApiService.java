@@ -19,7 +19,7 @@ public class Wso2ApiService {
     @Autowired
     private ApiRepository apiRepository;
 
-    @Value("${api.endpoint.url}")
+    @Value("${api.dockerServer.endpoint.url}")
     private String endPointUrl;
 
     public void wso2SaveApi() {
