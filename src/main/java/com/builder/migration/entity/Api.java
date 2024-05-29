@@ -21,6 +21,6 @@ public class Api {
     private String status;
     private String thumbnailUri;
 
-    @ElementCollection
+    // @ElementCollection
     private List<String> scopes;
 }
