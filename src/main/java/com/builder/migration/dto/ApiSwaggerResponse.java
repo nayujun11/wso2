@@ -1,10 +1,7 @@
 package com.builder.migration.dto;
 
-import java.util.List;
-
 import com.builder.migration.entity.Info;
 
-import jakarta.persistence.Embedded;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApiSwaggerResponse {
     private String swagger;
-    private List<String> paths;
-    @Embedded
+    private String paths;
     private Info info;
 }
