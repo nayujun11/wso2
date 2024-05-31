@@ -1,5 +1,7 @@
 package com.builder.migration.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +18,6 @@ public class ApiSwagger {
     private Long id;
     
     private String swaggerVersion;
-    private String paths;
+    private List<String> paths;
     private Info info;
 }
