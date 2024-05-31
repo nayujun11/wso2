@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.builder.migration.dto.ApiDetailResponse;
 import com.builder.migration.dto.ApiResponse;
 import com.builder.migration.entity.Api;
-import com.builder.migration.entity.ApiDetail;
+import com.builder.migration.entity.CorsConfiguration;
 import com.builder.migration.service.ApiDetailService;
 import com.builder.migration.service.ApiService;
 
@@ -31,9 +31,15 @@ public class ApiController {
         apiService.saveAll(apis);
     }
 
-    @PostMapping("/apiDetail/adds")
+    @PostMapping("/apiDetail/add")
     public void addApiDetail(@RequestBody ApiDetailResponse apiDetailResponse) {
-        List<ApiDetail> apiDetails = apiDetailResponse.getList();
-        apiDetailService.saveAll(apiDetails);
+        CorsConfiguration corsConfiguration = apiDetailResponse.getCorsConfiguration();
+        List<String> headers = corsConfiguration.getAccessControlAllowHeaders();
+
+        for (String header : headers) {
+            System.out.println(header);
+        }
+
+        apiDetailService.saveApiDetail(apiDetailResponse);
     }
 }

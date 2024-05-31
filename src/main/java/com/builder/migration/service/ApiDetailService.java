@@ -2,9 +2,11 @@ package com.builder.migration.service;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.builder.migration.dto.ApiDetailResponse;
 import com.builder.migration.entity.ApiDetail;
 import com.builder.migration.repository.ApiDetailRepository;
 
@@ -14,14 +16,11 @@ public class ApiDetailService {
     @Autowired
     private ApiDetailRepository apiDetailRepository;
 
-    public void saveAll(List<ApiDetail> apiDetails) {
-        // ApiDetail apiDefinition = objectMapper.readValue(json, ApiDetail.class);
-        // apiDetailRepository.saveAll((apiDetails));
+    @Autowired
+    private ModelMapper modelMapper;
 
-        if (apiDetails != null) {
-            apiDetailRepository.saveAll(apiDetails);
-        } else {
-            throw new IllegalArgumentException("ApiDetail list must not be null");
-        }
+    public void saveApiDetail(ApiDetailResponse  apiDetailResponse) {
+        ApiDetail apiDetail = modelMapper.map(apiDetailResponse, ApiDetail.class);
+        apiDetailRepository.save(apiDetail);
     }
 }

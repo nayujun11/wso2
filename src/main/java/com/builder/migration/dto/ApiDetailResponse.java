@@ -1,11 +1,13 @@
 package com.builder.migration.dto;
 
-import com.builder.migration.entity.ApiDetail;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
+import com.builder.migration.entity.CorsConfiguration;
+
+import jakarta.persistence.Embedded;
 
 @Data
 @NoArgsConstructor
@@ -36,14 +38,16 @@ public class ApiDetailResponse {
     private String visibility;
     private List<String> visibleRoles;
     private List<String> visibleTenants;
-
-    private ApiDetail.EndpointConfig endpointConfig;
+    private String endpointConfig;
     private String endpointSecurity;
     private String gatewayEnvironments;
     private List<String> labels;
     private List<String> sequences;
 
+    @Embedded
+    private CorsConfiguration corsConfiguration;
+
     private String subscriptionAvailability;
     private List<String> subscriptionAvailableTenants;
-    private List<ApiDetail> list; // List of ApiDetail objects
+
 }
