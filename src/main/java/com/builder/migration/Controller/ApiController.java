@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.builder.migration.dto.ApiDetailResponse;
 import com.builder.migration.dto.ApiResponse;
+import com.builder.migration.dto.ApiSwaggerResponse;
 import com.builder.migration.entity.Api;
 import com.builder.migration.entity.CorsConfiguration;
 import com.builder.migration.service.ApiDetailService;
 import com.builder.migration.service.ApiService;
+import com.builder.migration.service.ApiSwaggerService;
 
 @RestController
 @RequestMapping("/wso2api")
@@ -24,6 +26,9 @@ public class ApiController {
 
     @Autowired
     private ApiDetailService apiDetailService;
+
+    @Autowired
+    private ApiSwaggerService apiSwaggerService;
 
     @PostMapping("/api/adds")
     public void addApi(@RequestBody ApiResponse apiResponse) {
@@ -41,5 +46,10 @@ public class ApiController {
         }
 
         apiDetailService.saveApiDetail(apiDetailResponse);
+    }
+
+    @PostMapping("/apiSwagger/add")
+    public void addSwagger(@RequestBody ApiSwaggerResponse apiSwaggerResponse) {
+        apiSwaggerService.saveApiSwagger(apiSwaggerResponse);
     }
 }

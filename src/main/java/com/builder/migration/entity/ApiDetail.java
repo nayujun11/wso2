@@ -1,12 +1,8 @@
 package com.builder.migration.entity;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +12,6 @@ import java.util.Map;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "api_detail")
 public class ApiDetail {
     @Id
     private String id;
