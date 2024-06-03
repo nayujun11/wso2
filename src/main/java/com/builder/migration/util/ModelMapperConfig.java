@@ -1,4 +1,4 @@
-package com.builder.migration.dto;
+package com.builder.migration.util;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

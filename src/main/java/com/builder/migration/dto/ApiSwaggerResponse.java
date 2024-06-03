@@ -1,7 +1,11 @@
 package com.builder.migration.dto;
 
-import com.builder.migration.entity.Info;
+import java.util.Map;
 
+import com.builder.migration.embeded.Info;
+import com.builder.migration.util.MapToJsonConverter;
+
+import jakarta.persistence.Convert;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApiSwaggerResponse {
     private String swagger;
-    private String paths;
+    @Convert(converter = MapToJsonConverter.class)
+    private Map<String, Object> paths;
     private Info info;
 }

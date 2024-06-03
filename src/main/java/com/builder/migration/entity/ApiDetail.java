@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.Map;
 
+import com.builder.migration.embeded.CorsConfiguration;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -55,8 +57,6 @@ public class ApiDetail {
 
     @ElementCollection
     private List<String> accessControlRoles;
-
     private String businessInformation;
-
     private CorsConfiguration corsConfiguration;
 }

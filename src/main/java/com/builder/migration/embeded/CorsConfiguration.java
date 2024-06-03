@@ -1,4 +1,4 @@
-package com.builder.migration.entity;
+package com.builder.migration.embeded;
 
 import java.util.List;
 

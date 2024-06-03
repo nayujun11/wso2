@@ -2,7 +2,6 @@ package com.builder.migration.entity;
 
 import java.util.Map;
 
-import com.builder.migration.embeded.Info;
 import com.builder.migration.util.MapToJsonConverter;
 
 import jakarta.persistence.Convert;
@@ -13,17 +12,22 @@ import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data
 @NoArgsConstructor
-public class ApiSwagger {
+public class ApiTier {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String swaggerVersion;
-    
+    private String name;
+    private String description;
+    private String tierLevel;
     @Convert(converter = MapToJsonConverter.class)
-    private Map<String, Object> paths;
-    private Info info;
+    private Map<String, Object> attributes;
+    private int requestCount;
+    private int unitTime;
+    private String timeUnit;
+    private String tierPlan;
+    private boolean stopOnQuotaReach;
 }
