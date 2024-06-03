@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.builder.migration.dto.ApiApplicationResponse;
 import com.builder.migration.dto.ApiDetailResponse;
 import com.builder.migration.dto.ApiPolicyResponse;
 import com.builder.migration.dto.ApiResponse;
@@ -17,7 +18,9 @@ import com.builder.migration.dto.ApiTierResponse;
 import com.builder.migration.embeded.CorsConfiguration;
 import com.builder.migration.entity.Api;
 import com.builder.migration.entity.ApiTier;
+import com.builder.migration.entity.Application;
 import com.builder.migration.entity.Policy;
+import com.builder.migration.service.ApiApplicationService;
 import com.builder.migration.service.ApiDetailService;
 import com.builder.migration.service.ApiPolicyService;
 import com.builder.migration.service.ApiService;
@@ -42,6 +45,9 @@ public class ApiController {
 
     @Autowired
     private ApiPolicyService apiPolicyService;
+
+    @Autowired
+    private ApiApplicationService apiApplicationService;
 
     @PostMapping("/apis/adds")
     public void addApi(@RequestBody ApiResponse apiResponse) {
@@ -76,6 +82,12 @@ public class ApiController {
     public void addTiers(@RequestBody ApiPolicyResponse apiPolicyResponse) {
         List<Policy> policies = apiPolicyResponse.getList();
         apiPolicyService.saveAll(policies);
+    }
+
+    @PostMapping("/apiApplication/adds")
+    public void addApplications(@RequestBody ApiApplicationResponse apiApplicationResponse) {
+        List<Application> applications = apiApplicationResponse.getList();
+        apiApplicationService.saveAll(applications);
     }
 
     //GetMapping
