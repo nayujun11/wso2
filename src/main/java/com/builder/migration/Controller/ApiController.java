@@ -26,6 +26,7 @@ import com.builder.migration.service.ApiPolicyService;
 import com.builder.migration.service.ApiService;
 import com.builder.migration.service.ApiSwaggerService;
 import com.builder.migration.service.ApiTierService;
+import com.builder.migration.service.Wso2ApiExtractorService;
 
 @RestController
 @RequestMapping("/wso2api")
@@ -48,6 +49,9 @@ public class ApiController {
 
     @Autowired
     private ApiApplicationService apiApplicationService;
+
+    @Autowired
+    private Wso2ApiExtractorService wso2ApiExtractorService;
 
     @PostMapping("/apis/adds")
     public void addApi(@RequestBody ApiResponse apiResponse) {
@@ -92,7 +96,7 @@ public class ApiController {
 
     //GetMapping
     @GetMapping("/performTask")
-    public String performTask() {
-        return "작업이 수행되었습니다.";
+    public String performTask() throws Exception {
+        return wso2ApiExtractorService.getAccessToken();
     }
 }
