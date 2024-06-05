@@ -1,15 +1,12 @@
 package com.builder.migration.util;
 
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-import javax.net.ssl.SSLContext;
+import javax.net.ssl.*;
+import java.security.cert.X509Certificate;
 
 @Configuration
 public class CustomRestTemplate {
@@ -17,17 +14,22 @@ public class CustomRestTemplate {
     @Bean
     public RestTemplate restTemplate() throws Exception {
         // SSLContext를 생성하여 SSL 검증을 무시
-        SSLContext sslContext = SSLContextBuilder.create()
-                .loadTrustMaterial((chain, authType) -> true)
-                .build();
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(null, new TrustManager[] { new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+            public void checkClientTrusted(X509Certificate[] certs, String authType) {
+            }
+            public void checkServerTrusted(X509Certificate[] certs, String authType) {
+            }
+        } }, new java.security.SecureRandom());
 
-        // HttpClient를 생성하여 SSL 검증을 무시
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setSSLContext(sslContext)
-                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                .build();
+        HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+        HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> true);
 
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory(httpClient);
+        // SimpleClientHttpRequestFactory 설정
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         return new RestTemplate(factory);
     }
 }

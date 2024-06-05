@@ -26,7 +26,8 @@ import com.builder.migration.service.ApiPolicyService;
 import com.builder.migration.service.ApiService;
 import com.builder.migration.service.ApiSwaggerService;
 import com.builder.migration.service.ApiTierService;
-import com.builder.migration.service.Wso2ApiExtractorService;
+import com.builder.migration.service.Wso2GetApisService;
+import com.builder.migration.service.Wso2GetTokenService;
 
 @RestController
 @RequestMapping("/wso2api")
@@ -51,7 +52,10 @@ public class ApiController {
     private ApiApplicationService apiApplicationService;
 
     @Autowired
-    private Wso2ApiExtractorService wso2ApiExtractorService;
+    private Wso2GetTokenService wso2ApiExtractorService;
+
+    @Autowired
+    private Wso2GetApisService wso2GetApisService;
 
     @PostMapping("/apis/adds")
     public void addApi(@RequestBody ApiResponse apiResponse) {
@@ -96,7 +100,21 @@ public class ApiController {
 
     //GetMapping
     @GetMapping("/performTask")
-    public String performTask() throws Exception {
-        return wso2ApiExtractorService.getAccessToken();
+    public void performTask() throws Exception {
+        System.err.println("token:"+wso2ApiExtractorService.getAccessToken());
+        String accessToken = wso2ApiExtractorService.getAccessToken().getAccess_token();
+        ApiResponse apiResponse = wso2GetApisService.getWso2Apis(accessToken);
+        List<Api> apis = apiResponse.getList();
+
+        for (Api api : apis) {
+            System.out.println(api.getName());
+        }
     }
+
+    //GetMapping
+    // @GetMapping("/performTask")
+    // public String performTask() throws Exception {
+    //     System.err.println("token:"+wso2ApiExtractorService.getAccessToken());
+    //     return wso2ApiExtractorService.getAccessToken();
+    // }
 }
