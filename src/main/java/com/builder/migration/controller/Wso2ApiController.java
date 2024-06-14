@@ -1,7 +1,6 @@
 package com.builder.migration.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +30,7 @@ import com.builder.migration.service.Wso2GetTokenService;
 
 @RestController
 @RequestMapping("/wso2api")
-public class ApiController {
+public class Wso2ApiController {
 
     @Autowired
     private ApiService apiService;
@@ -101,6 +100,7 @@ public class ApiController {
     //GetMapping
     @GetMapping("/performTask")
     public void performTask() throws Exception {
+        // wso2 getToken 테스트
         System.err.println("token:"+wso2ApiExtractorService.getAccessToken());
         String accessToken = wso2ApiExtractorService.getAccessToken().getAccess_token();
         ApiResponse apiResponse = wso2GetApisService.getWso2Apis(accessToken);
@@ -109,6 +109,19 @@ public class ApiController {
         for (Api api : apis) {
             System.out.println(api.getName());
         }
+        // String id = "3e4fb900-c9bf-4b1a-9b4c-f254167e05e7";
+        // ApiDefinition apiDefinition = apiDefinitionService.getApiDefinition(id);
+
+        // System.out.println("Description:" + apiDefinition.getInfo().getDescription());
+        // String path = "/holidays/v1.0";
+        // ApiDefinition.Path apiPath = apiDefinition.getPaths().get(path);
+        // ApiDefinition.Path.Get apiGet = apiPath.getGet();
+        // Map<String, Response> apiResponse = apiGet.getResponses();
+        // ApiDefinition.Path.Get.Response response = apiResponse.get("200");
+
+        // System.out.println("descripion :" + response.getDescription());
+
+
     }
 
     //GetMapping

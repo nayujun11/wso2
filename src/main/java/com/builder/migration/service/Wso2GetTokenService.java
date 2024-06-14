@@ -1,6 +1,7 @@
 package com.builder.migration.service;
 
-import org.apache.tomcat.util.http.parser.Authorization;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,14 +14,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.builder.migration.dto.ApiTokenResponse;
-import com.builder.migration.repository.ApiRepository;
 
 @Service
 public class Wso2GetTokenService {
     
-    @Autowired
-    private ApiRepository apiRepository;
-
     @Value("${wso2.api.host}")
     private String host;
 
@@ -40,11 +37,19 @@ public class Wso2GetTokenService {
     private RestTemplate restTemplate;
 
     public ApiTokenResponse getAccessToken() throws Exception {
+
+
+        String originalString = clientId+":"+clientSecret;
+        
+        // Base64 인코딩
+        String encodedString = Base64.getEncoder().encodeToString(originalString.getBytes());
+        
+        System.out.println("Base64 인코딩 결과: " + encodedString);
         
         String url = host + "/oauth2/token";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/x-www-form-urlencoded");
-        headers.set("Authorization","Basic OXo0b29NSDRVOUJKM2VSV0ROZzB3bVUybnNvYTp3d1RuTXh4MzRUS3RsZ01wTms5ZmFKX1JiWllh");
+        headers.set("Authorization","Basic "+encodedString);
 
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("username", userName);
