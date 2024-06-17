@@ -23,7 +23,7 @@ public class KongServiceService {
     @Value("${kong.admin.url}")
     private String adminUrl;
 
-    public ResponseEntity<String> createKongService(KongServiceResponse kongService) throws Exception {
+    public ResponseEntity<String> createService(KongServiceResponse kongService) throws Exception {
 
         String url = adminUrl + "/" + workspaceId + "/services";
         HttpHeaders headers = new HttpHeaders();
@@ -37,7 +37,7 @@ public class KongServiceService {
         return response;
     }
 
-    public ResponseEntity<String> deleteKongService(String name) throws Exception {
+    public ResponseEntity<String> deleteService(String name) throws Exception {
 
         String url = adminUrl + "/services" + "/" + name;
         HttpHeaders headers = new HttpHeaders();

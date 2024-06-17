@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.builder.migration.dto.KongConsumerResponse;
+import com.builder.migration.dto.KongPluginAclResponse;
 import com.builder.migration.dto.KongPluginResponse;
 import com.builder.migration.dto.KongRouteResponse;
 import com.builder.migration.dto.KongServiceResponse;
@@ -45,25 +46,31 @@ public class KongApiController {
 
     @PostMapping("service/add")
     public void addService(@RequestBody KongServiceResponse kongServiceResponse) throws Exception {
-        ResponseEntity<String> response = kongServiceService.createKongService(kongServiceResponse);
+        ResponseEntity<String> response = kongServiceService.createService(kongServiceResponse);
         System.out.println("response:" + response.getStatusCode());
     }
 
     @DeleteMapping("service/del/{name}")
     public void delService(@PathVariable String name) throws Exception {
-        ResponseEntity<String> response = kongServiceService.deleteKongService(name);
+        ResponseEntity<String> response = kongServiceService.deleteService(name);
         System.out.println("response:" + response.getStatusCode());
     }
 
     @PostMapping("route/add")
     public void addService(@RequestBody KongRouteResponse KongRouteResponse) throws Exception {
-        ResponseEntity<String> response = kongRouteService.createKongRoute(KongRouteResponse);
+        ResponseEntity<String> response = kongRouteService.createRoute(KongRouteResponse);
         System.out.println("response:" + response.getStatusCode());
     }
 
     @PostMapping("consumer/add")
     public void addConsumer(@RequestBody KongConsumerResponse KongConsumerResponse) throws Exception {
         ResponseEntity<String> response = kongConsumerService.createConsumer(KongConsumerResponse);
+        System.out.println("response:" + response.getStatusCode());
+    }
+
+    @PostMapping("/service/plugin/add/{id}")
+    public void addPlugin(@PathVariable String id, @RequestBody KongPluginResponse KongPluginResponse) throws Exception {
+        ResponseEntity<String> response = kongPluginService.createPluginInService(id, KongPluginResponse);
         System.out.println("response:" + response.getStatusCode());
     }
 

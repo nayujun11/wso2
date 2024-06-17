@@ -23,7 +23,7 @@ public class KongRouteService {
     @Value("${kong.admin.url}")
     private String adminUrl;
 
-    public ResponseEntity<String> createKongRoute(KongRouteResponse kongRoute) throws Exception {
+    public ResponseEntity<String> createRoute(KongRouteResponse kongRoute) throws Exception {
 
         String url = adminUrl + "/routes";
         HttpHeaders headers = new HttpHeaders();
