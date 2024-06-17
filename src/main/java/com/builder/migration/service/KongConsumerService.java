@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.builder.migration.dto.KongConsumerResponse;
 import com.builder.migration.dto.KongRouteResponse;
 
 @Service
@@ -23,9 +25,9 @@ public class KongConsumerService {
     @Value("${kong.admin.url}")
     private String adminUrl;
 
-    public ResponseEntity<String> createKongConsumer(KongConsumerResponse kongConsumer) throws Exception {
+    public ResponseEntity<String> createConsumer(KongConsumerResponse kongConsumer) throws Exception {
 
-        String url = adminUrl + "/routes";
+        String url = adminUrl + "/consumers";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
