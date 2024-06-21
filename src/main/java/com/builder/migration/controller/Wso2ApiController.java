@@ -27,6 +27,7 @@ import com.builder.migration.service.ApiSwaggerService;
 import com.builder.migration.service.ApiTierService;
 import com.builder.migration.service.Wso2GetApisService;
 import com.builder.migration.service.Wso2GetTokenService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 @RequestMapping("/wso2api")
@@ -108,7 +109,19 @@ public class Wso2ApiController {
 
         for (Api api : apis) {
             System.out.println(api.getName());
+            //ObjectMapper
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            try {
+                String jsonString = objectMapper.writeValueAsString(api);
+                System.out.println("api :" + jsonString);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+
+
         // String id = "3e4fb900-c9bf-4b1a-9b4c-f254167e05e7";
         // ApiDefinition apiDefinition = apiDefinitionService.getApiDefinition(id);
 
