@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ApiSwaggerResponse {
     private String swagger;
+
     @Convert(converter = MapToJsonConverter.class)
     private Map<String, Object> paths;
+    
     private Info info;
 }

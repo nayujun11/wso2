@@ -3,6 +3,8 @@ package com.builder.migration.dto;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,13 +17,28 @@ public class KongRouteResponse {
     private List<String> hosts;
     private List<String> paths;
     private Map<String, List<String>> headers;
-    private Integer https_redirect_status_code;
-    private Integer regex_priority;
-    private Boolean strip_path;
-    private String path_handling;
-    private Boolean preserve_host;
-    private Boolean request_buffering;
-    private Boolean response_buffering;
+    
+    @JsonProperty("https_redirect_status_code")
+    private Integer httpsRedirectStatusCode;
+
+    @JsonProperty("regex_priority")
+    private Integer regexPriority;
+
+    @JsonProperty("strip_path")
+    private Boolean stripPath;
+
+    @JsonProperty("path_handling")
+    private String pathHandling;
+
+    @JsonProperty("preserve_host")
+    private Boolean preserveHost;
+
+    @JsonProperty("request_buffering")
+    private Boolean requestBuffering;
+
+    @JsonProperty("response_buffering")
+    private Boolean responseBuffering;
+
     private List<String> tags;
     private Service service;
 

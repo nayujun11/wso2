@@ -2,6 +2,8 @@ package com.builder.migration.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +19,10 @@ public class KongPluginAclResponse {
     @NoArgsConstructor
     public static class Config {
         private List<String> allow;
-        private Boolean hide_groups_header;
+
+        @JsonProperty("hide_groups_header")
+        private Boolean hideGroupsHeader;
+        
         private Integer hour;
         private Integer minute;
         private Integer day;

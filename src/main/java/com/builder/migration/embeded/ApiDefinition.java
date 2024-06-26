@@ -34,13 +34,11 @@ public class ApiDefinition {
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Path {
-        @JsonProperty("get")
         private Get get;
 
         @Data
         @JsonInclude(JsonInclude.Include.NON_NULL)
         public static class Get {
-            @JsonProperty("responses")
             private Map<String, Response> responses;
 
             public Map<String, Response> getResponses() {
@@ -50,7 +48,6 @@ public class ApiDefinition {
             @Data
             @JsonInclude(JsonInclude.Include.NON_NULL)
             public static class Response {
-                @JsonProperty("description")
                 private String description;
             }
         }

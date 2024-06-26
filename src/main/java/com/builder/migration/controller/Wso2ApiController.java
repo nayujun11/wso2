@@ -102,10 +102,12 @@ public class Wso2ApiController {
     @GetMapping("/performTask")
     public void performTask() throws Exception {
         // wso2 getToken 테스트
-        System.err.println("token:"+wso2ApiExtractorService.getAccessToken());
-        String accessToken = wso2ApiExtractorService.getAccessToken().getAccess_token();
+        System.err.println("token:" + wso2ApiExtractorService.getAccessToken());
+        String accessToken = wso2ApiExtractorService.getAccessToken().getAccessToken();
         ApiResponse apiResponse = wso2GetApisService.getWso2Apis(accessToken);
         List<Api> apis = apiResponse.getList();
+
+        
 
         for (Api api : apis) {
             System.out.println(api.getName());

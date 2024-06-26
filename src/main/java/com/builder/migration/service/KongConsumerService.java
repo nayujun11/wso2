@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.builder.migration.dto.KongConsumerResponse;
-import com.builder.migration.dto.KongRouteResponse;
 
 @Service
 public class KongConsumerService {

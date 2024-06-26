@@ -3,6 +3,7 @@ package com.builder.migration.dto;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,14 +17,17 @@ public class KongPluginResponse {
     private String route;
     private String service;
     private String consumer;
-    private String instance_name;
+    @JsonProperty("instance_name")
+    private String instanceName;
     private Config config;
     private List<String> protocols;
     private Boolean enabled;
     private List<String> tags;
     private Ordering ordering; //cousumer 적용된 호출에서는 ordering 적용불가
-    private String created_at;
-    private String updated_at;
+    @JsonProperty("created_at")
+    private String createdAt;
+    @JsonProperty("updated_at")
+    private String updatedAt;
 
     @Data
     @NoArgsConstructor
@@ -34,7 +38,9 @@ public class KongPluginResponse {
         private Integer day;
         private List<String> allow;
         private List<String> deny;
-        private Boolean hide_groups_header;
+        
+        @JsonProperty("hide_groups_header")
+        private Boolean hideGroupsHeader;
 
         //다른 플러그인 추가시 아래 항목추가
         //{"day": null, "hour": 50, "path": null, "year": null, "month": null, "redis": {"ssl": false, "host": null, "port": 6379,

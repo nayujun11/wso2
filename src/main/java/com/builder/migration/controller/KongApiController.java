@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.builder.migration.dto.KongConsumerResponse;
-import com.builder.migration.dto.KongPluginAclResponse;
 import com.builder.migration.dto.KongPluginResponse;
 import com.builder.migration.dto.KongRouteResponse;
 import com.builder.migration.dto.KongServiceResponse;

@@ -1,5 +1,7 @@
 package com.builder.migration.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -7,5 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KongConsumerResponse {
     private String username;
-    private String custom_id; // 외부 시스템 사용자와 구분용 (선택)
+    
+    @JsonProperty("custom_id")
+    private String customId; // 외부 시스템 사용자와 구분용 (선택)
 }

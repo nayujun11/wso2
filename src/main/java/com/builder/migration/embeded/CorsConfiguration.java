@@ -11,12 +11,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Embeddable
 public class CorsConfiguration {
+
     private Boolean corsConfigurationEnabled;
+
     @ElementCollection
     private List<String> accessControlAllowOrigins;
+
     private Boolean accessControlAllowCredentials;
+
     @ElementCollection
     private List<String> accessControlAllowHeaders;
+    
     @ElementCollection
     private List<String> accessControlAllowMethods;
 }
