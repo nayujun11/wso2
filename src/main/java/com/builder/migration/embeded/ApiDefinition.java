@@ -9,25 +9,14 @@ import lombok.Data;
 
 @Data
 public class ApiDefinition {
-
-    @JsonProperty("swagger")
     private String swagger;
-
-    @JsonProperty("paths")
     private Map<String, Path> paths;
-
-    @JsonProperty("info")
     private Info info;
 
     @Data
     public static class Info {
-        @JsonProperty("title")
         private String title;
-
-        @JsonProperty("version")
         private String version;
-
-        @JsonProperty("description")
         private String description;
     }
 

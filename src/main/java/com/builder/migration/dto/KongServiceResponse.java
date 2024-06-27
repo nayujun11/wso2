@@ -2,6 +2,7 @@ package com.builder.migration.dto;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class KongServiceResponse {
     private String name;
     private Integer retries;
@@ -28,10 +30,18 @@ public class KongServiceResponse {
 
     private List<String> tags;       // wso2의 특정값 셋팅 필요
     
-    // private ClientCertificate client_certificate;  //TLS 인증할때 필요
-    // private Boolean tls_verify;
-    // private Integer tls_verify_depth;
-    // private List<String> ca_certificates;
+    @JsonProperty("client_certificate")
+    private ClientCertificate clientCertificate;  //TLS 인증할때 필요
+
+    @JsonProperty("tls_verify")
+    private Boolean tlsVerify;
+
+    @JsonProperty("tls_verify_depth")
+    private Integer tlsVerifyDepth;
+
+    @JsonProperty("ca_certificates")
+    private List<String> caCertificates;
+    
     private Boolean enabled;    
 }
 

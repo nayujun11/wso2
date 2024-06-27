@@ -13,22 +13,28 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class KongUpstreamResponse {
     private String name;
-    private String algorithm;
+    private String algorithm; // round-robin
+
     @JsonProperty("hash_on")
-    private String hashOn;
+    private String hashOn; // none
+
     @JsonProperty("hash_fallback")
-    private String hashFallback;
+    private String hashFallback; // none
+
     @JsonProperty("hash_on_cookie_path")
-    private String hashOnCookiePath;
-    private int slots;
+    private String hashOnCookiePath; // "/"
+
+    private int slots; // 10000
     private Healthchecks healthchecks;
-    private List<String> tags;
+    private List<String> tags; // "user-level", "low-priority"
+
     @JsonProperty("host_header")
-    private String hostHeader;
-    @JsonProperty("client_certificate")
+    private String hostHeader; // example.com
+
     private ClientCertificate clientCertificate;
+
     @JsonProperty("use_srv_name")
-    private boolean useSrvName;
+    private boolean useSrvName; // false
 
     @Data
     @NoArgsConstructor
@@ -36,75 +42,81 @@ public class KongUpstreamResponse {
         private Passive passive;
         private Active active;
         private int threshold;
+    }
 
-        @Data
-        @NoArgsConstructor
-        public static class Passive {
-            private String type;
-            private Healthy healthy;
-            private Unhealthy unhealthy;
+    @Data
+    @NoArgsConstructor
+    public static class Passive {
+        private String type; // http
+        private Healthy healthy;
+        private Unhealthy unhealthy;
+    }
 
-            @Data
-            @NoArgsConstructor
-            public static class Healthy {
-                @JsonProperty("http_statuses")
-                private List<Integer> httpStatuses;
-                private int successes;
-            }
+    @Data
+    @NoArgsConstructor
+    public static class Healthy {
+        @JsonProperty("http_statuses")
+        private List<Integer> httpStatuses; //200,201,202,203,204,205,206,207,208,226,300,301,302,303,304,305,306,307,308
 
-            @Data
-            @NoArgsConstructor
-            public static class Unhealthy {
-                @JsonProperty("http_statuses")
-                private List<Integer> httpStatuses;
-                private int timeouts;
-                @JsonProperty("http_failures")
-                private int httpFailures;
-                @JsonProperty("tcp_failures")
-                private int tcpFailures;
-            }
-        }
+        private int successes; // 0
+    }
 
-        @Data
-        @NoArgsConstructor
-        public static class Active {
-            @JsonProperty("https_verify_certificate")
-            private boolean httpsVerifyCertificate;
-            private com.builder.migration.dto.KongUpstreamResponse.Healthchecks.Passive.Healthy healthy;
-            private com.builder.migration.dto.KongUpstreamResponse.Healthchecks.Passive.Unhealthy unhealthy;
-            private String type;
-            private int concurrency;
-            private Headers headers;
-            private int timeout;
+    @Data
+    @NoArgsConstructor
+    public static class Unhealthy {
+        @JsonProperty("http_statuses")
+        private List<Integer> httpStatuses; // 429,500,503
 
-            @JsonProperty("http_path")
-            private String httpPath;
+        private int timeouts; // 0
 
-            @JsonProperty("https_sni")
-            private String httpsSni;
+        @JsonProperty("http_failures")
+        private int httpFailures; // 0
 
-            @Data
-            @NoArgsConstructor
-            public static class Headers {
-                @JsonProperty("x-my-header")
-                private List<Header> xMyHeader;
-                
-                @JsonProperty("x-another-header")
-                private List<Header> xAnotherHeader;
+        @JsonProperty("tcp_failures")
+        private int tcpFailures; // 0
+    }
 
-                @Data
-                @NoArgsConstructor
-                public static class Header {
-                    private String type;
-                    private String description;
-                }
-            }
-        }
+    @Data
+    @NoArgsConstructor
+    public static class Active {
+        @JsonProperty("https_verify_certificate")
+        private boolean httpsVerifyCertificate; // true
+
+        private Healthy healthy;
+        private Unhealthy unhealthy;
+        private String type; // http
+        private int concurrency; // 10
+        private Headers headers; 
+        private int timeout; // 1
+
+        @JsonProperty("http_path")
+        private String httpPath; // "/"
+
+        @JsonProperty("https_sni")
+        private String httpsSni; // "example.com"
+    }
+
+    @Data
+    @NoArgsConstructor
+    public static class Headers {
+        @JsonProperty("x-my-header")
+        private List<Header> xMyHeader;
+
+        @JsonProperty("x-another-header")
+        private List<Header> xAnotherHeader;
+    }
+
+    @Data
+    @NoArgsConstructor
+    public static class Header {
+        private String type; // array
+        private List<String> items; // string
+        private String description; // The value(s) of the x-my-header header.
     }
 
     @Data
     @NoArgsConstructor
     public static class ClientCertificate {
-        private String id;
+        private String id; // ea29aaa3-3b2d-488c-b90c-56df8e0dd8c6
     }
 }
