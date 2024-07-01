@@ -100,7 +100,7 @@ public class Wso2ApiController {
 
     //GetMapping
     @GetMapping("/performTask")
-    public void performTask() throws Exception {
+    public List<Api> performTask() throws Exception {
         // wso2 getToken 테스트
         System.err.println("token:" + wso2ApiExtractorService.getAccessToken());
         String accessToken = wso2ApiExtractorService.getAccessToken().getAccessToken();
@@ -135,8 +135,7 @@ public class Wso2ApiController {
         // ApiDefinition.Path.Get.Response response = apiResponse.get("200");
 
         // System.out.println("descripion :" + response.getDescription());
-
-
+        return apis;
     }
 
     //GetMapping
