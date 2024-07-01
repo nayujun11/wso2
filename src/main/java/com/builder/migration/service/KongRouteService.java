@@ -30,7 +30,9 @@ public class KongRouteService {
 
     private List<String> protocols;
     private List<String> methods;
+    @SuppressWarnings("unused")
     private List<String> hosts;
+    @SuppressWarnings("unused")
     private List<String> paths;
     private List<String> tags;
     private Map<String, List<String>> routeHeaders;

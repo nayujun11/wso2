@@ -33,6 +33,7 @@ public class KongServiceService {
     private String adminUrl;
 
     private List<String> tags;
+    @SuppressWarnings("unused")
     private List<String> caCertificates;
 
     public ResponseEntity<String> createService(KongServiceResponse kongService) throws Exception {
@@ -57,6 +58,7 @@ public class KongServiceService {
         tags.add("user-level");
         kongService.setTags(tags);
 
+        @SuppressWarnings("unused")
         ClientCertificate clientCertificate = new ClientCertificate();
         // clientCertificate.setId("4e3ad2e4-0bc4-4638-8e34-c84a417ba39b"); // 유효한 uuid셋팅
         // kongService.setCaCertificates(caCertificates);
