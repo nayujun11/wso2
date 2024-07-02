@@ -35,7 +35,7 @@ public class Wso2GetApisService {
     public ApiResponse getWso2Apis(String accessToken) throws Exception {
         String url = host + "/api/am/store/v0.14/apis";
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization","Bearer " + accessToken);
+        headers.set("Authorization", "Bearer " + accessToken);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 

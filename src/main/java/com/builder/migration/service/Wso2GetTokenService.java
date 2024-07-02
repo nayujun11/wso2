@@ -39,7 +39,7 @@ public class Wso2GetTokenService {
     public ApiTokenResponse getAccessToken() throws Exception {
 
 
-        String originalString = clientId+":"+clientSecret;
+        String originalString = clientId + ":" + clientSecret;
         
         // Base64 인코딩
         String encodedString = Base64.getEncoder().encodeToString(originalString.getBytes());
@@ -49,7 +49,7 @@ public class Wso2GetTokenService {
         String url = host + "/oauth2/token";
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/x-www-form-urlencoded");
-        headers.set("Authorization","Basic "+encodedString);
+        headers.set("Authorization", "Basic " + encodedString);
 
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("username", userName);
