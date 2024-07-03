@@ -100,18 +100,10 @@ public class KongUpstreamResponse {
     @NoArgsConstructor
     public static class Headers {
         @JsonProperty("x-my-header")
-        private List<Header> xMyHeader;
+        private List<String> xMyHeader; // List of strings
 
         @JsonProperty("x-another-header")
-        private List<Header> xAnotherHeader;
-    }
-
-    @Data
-    @NoArgsConstructor
-    public static class Header {
-        private String type; // array
-        private List<String> items; // string
-        private String description; // The value(s) of the x-my-header header.
+        private List<String> xAnotherHeader; // List of strings
     }
 
     @Data

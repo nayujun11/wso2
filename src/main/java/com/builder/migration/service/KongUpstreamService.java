@@ -31,7 +31,7 @@ public class KongUpstreamService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         // setting 
-        kongUpstream.setName("");
+        // kongUpstream.setName("");
 
         // 객체를 사용하여 요청 데이터 생성
         HttpEntity<KongUpstreamResponse> entity = new HttpEntity<>(kongUpstream, headers);

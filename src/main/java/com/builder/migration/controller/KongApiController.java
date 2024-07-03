@@ -14,10 +14,12 @@ import com.builder.migration.dto.KongConsumerResponse;
 import com.builder.migration.dto.KongPluginResponse;
 import com.builder.migration.dto.KongRouteResponse;
 import com.builder.migration.dto.KongServiceResponse;
+import com.builder.migration.dto.KongUpstreamResponse;
 import com.builder.migration.service.KongConsumerService;
 import com.builder.migration.service.KongPluginService;
 import com.builder.migration.service.KongRouteService;
 import com.builder.migration.service.KongServiceService;
+import com.builder.migration.service.KongUpstreamService;
 import com.builder.migration.service.KongWorkSpaceService;
 
 @RestController
@@ -37,6 +39,9 @@ public class KongApiController {
 
     @Autowired
     private KongPluginService kongPluginService;
+
+    @Autowired
+    private KongUpstreamService kongUpstreamService;
 
     @PostMapping("/workspace/add")
     public void addApplications(String name) throws Exception {
@@ -88,6 +93,12 @@ public class KongApiController {
     @PatchMapping("plugin/update/{id}")
     public void delPlugin(@PathVariable String id, @RequestBody KongPluginResponse kongPluginResponse) throws Exception {
         ResponseEntity<String> response = kongPluginService.updatePlugin(id, kongPluginResponse);
+        System.out.println("response:" + response.getStatusCode());
+    }
+
+    @PostMapping("upstream/add")
+    public void addUpstream(@RequestBody KongUpstreamResponse kongUpstreamResponse) throws Exception {
+        ResponseEntity<String> response = kongUpstreamService.createUpstream(kongUpstreamResponse);
         System.out.println("response:" + response.getStatusCode());
     }
 }
